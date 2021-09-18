@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import Images from '../assets/index';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 const Home = () => {
     return(
@@ -10,6 +11,9 @@ const Home = () => {
                 source={Images.main}
             />
             <Text style={styles.title}>Archery Range Finder</Text>
+            <GooglePlacesAutocomplete
+
+            />
             <Image
                 style={styles.image}
                 source={Images.main}
