@@ -4,7 +4,8 @@ import Images from '../assets/index';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_API_KEY } from "@env";
 
-const Home = () => {
+const Home = ({navigation}) => {
+    //const [location, setLocation] =  
     return(
         <SafeAreaView styles={styles.container}>
             <View>
@@ -37,6 +38,7 @@ const Home = () => {
                 <Button
                     title="Submit a Range"
                     color="black"
+                    onPress={() => {navigation.navigate("Submit")}}
                 />
             </View>
         </SafeAreaView>
