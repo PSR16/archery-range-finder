@@ -1,42 +1,62 @@
-import React from 'react';
-import { Button, Text, SafeAreaView, TextInput, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import { Pressable, Button, View, Text, SafeAreaView, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_API_KEY } from "@env";
+import {Picker} from '@react-native-picker/picker';
 
 const Submit = () => {
+    const accessOptions = [
+        {
+            key: 'out',
+            text: 'Outdoor'
+        },
+        {
+            key: 'in',
+            text: 'Indoor'
+        },
+        {
+            key:'both',
+            text: 'Both'
+        }
+    ]
     return(
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Submit a Range</Text>
-            <Text style={styles.label}>Range Name</Text>
+        
             <TextInput
                 style = {styles.input}
                 placeholder="Range Name"
             />
-            <Text style={styles.label}>Contact Email</Text>
+           
             <TextInput
                 style = {styles.input}
                 placeholder="Contact Email"
             />
-            <Text style={styles.label}>Website</Text>
+         
             <TextInput
                 style = {styles.input}
                 placeholder="Website"
             />
-            <Text style={styles.label}>Access</Text>
+           
             <TextInput
                 style = {styles.input}
-                placeholder="Range Access"
+                placeholder="Phone"
             />
-            <Text style={styles.label}>Type</Text>
-            <TextInput
-                style = {styles.input}
-                placeholder="Type"
-            />
-            <Text style={styles.label}>Address</Text>
             <TextInput
                 style = {styles.input}
                 placeholder="Address"
             />
+            <Text style={{fontSize: 20, padding: 10}}>Access</Text>
+            {accessOptions.map(item => {
+                return(
+                    <View key={item.key} style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.circle}/>
+                        <Text style={styles.options}>
+                            {item.text}
+                        </Text>
+                    </View>);
+            })}
+            <Text style={{fontSize: 20}}>Amenities</Text>
             <Button 
                 title="Submit"
                 color="black"
@@ -50,20 +70,35 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
-    label: {
-        fontSize: 18
-    },
     title: {
         textAlign: 'center',
         fontSize: 30,
-        padding: 10
-    },
-    image: {
-        width: '100%',
-        height: 200
+        margin: 30
     },
     input: {
-        fontSize: 20
+        fontSize: 20,
+        borderWidth: 1,
+        borderColor: 'gray',
+        padding: 10,
+        width: '80%',
+        borderRadius: 20,
+        margin: 10
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        margin: 3
+    },
+    circle: {
+        height: 20,
+        width: 20,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#ACACAC',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    options: {
+        fontSize: 17
     }
 });
 
