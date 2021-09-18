@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Button, View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import Images from '../assets/index';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_API_KEY } from "@env";
 
 const Home = ({navigation}) => {
-    //const [location, setLocation] =  
+    const [location, setLocation] =  useState('');
     return(
         <SafeAreaView styles={styles.container}>
             <View>
@@ -29,7 +29,7 @@ const Home = ({navigation}) => {
                         language: 'en'
                     }}
                     onPress={(data, details = null) => {
-                        console.log(data, details);
+                        setLocation(data, details);
                     }}
                     debounce={200}
                     enablePoweredByContainer={false}
