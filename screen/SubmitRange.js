@@ -8,52 +8,28 @@ const SubmitRange = ({navigation}) => {
     const [website, setWebsite] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
-    const accessOptions = [
-        {
-            key: 'out',
-            text: 'Outdoor'
-        },
-        {
-            key: 'in',
-            text: 'Indoor'
-        },
-        {
-            key: 'member',
-            text: 'Member-Only'
-        },
-        {
-            key: 'public',
-            text: 'Public'
-        }
-    ];
-
-    const amenities = [
-        {
-            key: 'bathroom',
-            text: 'Bathrooms'
-        },
-        {
-            key: 'equipment',
-            text: 'Equipment Rental'
-        },
-        {
-            key: 'shop',
-            text: 'Retail Shop'
-        },
-        {
-            key: 'clubhouse',
-            text: 'Clubhouse'
-        }
-    ];
-    
+    const [publicRange, setPublic] = useState(false);
+    const [memberOnly, setMember] = useState(false);
+    const [outdoor, setOutdoor] = useState(false);
+    const [indoor, setIndoor] = useState(false);
+    const [bathroom, setBathroom] = useState(false);
+    const [equipment, setEquipment] = useState(false);
+    const [retail, setRetail] = useState(false);
+    const [clubhouse, setClub] = useState(false);
+ 
     const handleValueChange = () => {
         let rangeSubmission = {
             "name": rangeName,
             "email": email,
             "website": website,
             "phone": phone,
-            "address": address
+            "address": address,
+            "public": publicRange,
+            "outdoor": outdoor,
+            "indoor": indoor,
+            "memberOnly": memberOnly
         }
+        console.log(rangeSubmission)
     }
 
     return(
@@ -93,39 +69,53 @@ const SubmitRange = ({navigation}) => {
                 
             <Text style={{fontSize: 20, padding: 10}}>Access</Text>
             <View style={{flexWrap: 'wrap',  flexShrink: 1, flexDirection: 'row', paddingLeft: 20, paddingRight: 15}}>
-            {accessOptions.map(item => {
-                    return(
-                        <BouncyCheckbox 
-                            key={item.key}
-                            size={20} 
-                            text={item.text}
-                            style={styles.checkbox}
-                            iconStyle={{ borderColor: "green" }}
-                            textStyle={{
-                                textDecorationLine: "none"
-                           }}
-                        />
-                        );
-                    })
-                }
+                <BouncyCheckbox 
+                    size={20} 
+                    text="Outdoor"
+                    style={styles.checkbox}
+                    iconStyle={{ borderColor: "green" }}
+                    textStyle={{
+                        textDecorationLine: "none"
+                    }}
+                    onPress={() => setOutdoor(true)}
+                />
+                <BouncyCheckbox 
+                    size={20} 
+                    text="Indoor"
+                    style={styles.checkbox}
+                    iconStyle={{ borderColor: "green" }}
+                    textStyle={{
+                        textDecorationLine: "none"
+                    }}
+                    onPress={() => setIndoor(true)}
+                />
+                </View>
+            <View style={{flexWrap: 'wrap',  flexShrink: 1, flexDirection: 'row', paddingLeft: 20, paddingRight: 15}}>
+                <BouncyCheckbox 
+                    size={20} 
+                    text="Public"
+                    style={styles.checkbox}
+                    iconStyle={{ borderColor: "green" }}
+                    textStyle={{
+                        textDecorationLine: "none"
+                    }}
+                    onPress={() => setPublic(true)}
+                />
+                <BouncyCheckbox 
+                    size={20} 
+                    text="Members-Only"
+                    style={styles.checkbox}
+                    iconStyle={{ borderColor: "green" }}
+                    textStyle={{
+                        textDecorationLine: "none"
+                    }}
+                    onPress={() => setMember(true)}
+                />
             </View>
+                    
             <Text style={{fontSize: 20, padding: 10}}>Amenities</Text>
             <View style={{flexWrap: 'wrap',  flexShrink: 1, flexDirection: 'row', paddingLeft: 20, paddingRight: 15}}>
-                {amenities.map(item => {
-                    return(
-                        <BouncyCheckbox 
-                            key={item.key}
-                            size={20} 
-                            text={item.text}
-                            style={styles.checkbox}
-                            iconStyle={{ borderColor: "green" }}
-                            textStyle={{
-                                textDecorationLine: "none"
-                           }}
-                        />
-                        );
-                    })
-                }
+                
             </View>
             <Button 
                 onPress={handleValueChange}
