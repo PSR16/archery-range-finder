@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import { Pressable, Button, View, Text, SafeAreaView, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { GOOGLE_API_KEY } from "@env";
+import React, {useState } from 'react';
+import { Button, View, Text, SafeAreaView, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-const Submit = () => {
+const SubmitRange = ({navigation}) => {
     const [rangeName, setRangeName] = useState('');
     const [email, setEmail] = useState('');
     const [website, setWebsite] = useState('');
@@ -19,8 +18,12 @@ const Submit = () => {
             text: 'Indoor'
         },
         {
-            key:'both',
-            text: 'Both'
+            key: 'member',
+            text: 'Member-Only'
+        },
+        {
+            key: 'public',
+            text: 'Public'
         }
     ];
 
@@ -32,19 +35,30 @@ const Submit = () => {
         {
             key: 'equipment',
             text: 'Equipment Rental'
+        },
+        {
+            key: 'shop',
+            text: 'Retail Shop'
+        },
+        {
+            key: 'clubhouse',
+            text: 'Clubhouse'
         }
     ];
-
+    
     const handleValueChange = () => {
-        console.log(rangeName)
-        console.log(email)
-        console.log(phone)
-        console.log(address)
-        console.log(website)
-      }
+        let rangeSubmission = {
+            "name": rangeName,
+            "email": email,
+            "website": website,
+            "phone": phone,
+            "address": address
+        }
+    }
 
     return(
         <SafeAreaView style={styles.container}>
+            <Button title="Go back" onPress={() => navigation.goBack()} />
             <Text style={styles.title}>Submit a Range</Text>
             <TextInput 
                 name="range"
@@ -78,28 +92,38 @@ const Submit = () => {
             />
                 
             <Text style={{fontSize: 20, padding: 10}}>Access</Text>
-            <View style={{flexDirection: 'row', margin: 10}}>
-                {accessOptions.map(item => {
+            <View style={{flexWrap: 'wrap',  flexShrink: 1, flexDirection: 'row', paddingLeft: 20, paddingRight: 15}}>
+            {accessOptions.map(item => {
                     return(
-                        <View key={item.key} style={styles.buttonContainer}>
-                            <TouchableOpacity style={styles.circle} />
-                            <Text style={styles.options}>
-                                {item.text}
-                            </Text>
-                        </View>);
+                        <BouncyCheckbox 
+                            key={item.key}
+                            size={20} 
+                            text={item.text}
+                            style={styles.checkbox}
+                            iconStyle={{ borderColor: "green" }}
+                            textStyle={{
+                                textDecorationLine: "none"
+                           }}
+                        />
+                        );
                     })
                 }
             </View>
             <Text style={{fontSize: 20, padding: 10}}>Amenities</Text>
-            <View style={{flexDirection: 'row', margin: 10}}>
+            <View style={{flexWrap: 'wrap',  flexShrink: 1, flexDirection: 'row', paddingLeft: 20, paddingRight: 15}}>
                 {amenities.map(item => {
                     return(
-                        <View key={item.key} style={styles.buttonContainer}>
-                            <TouchableOpacity style={styles.checkBox}/>
-                            <Text style={styles.options}>
-                                {item.text}
-                            </Text>
-                        </View>);
+                        <BouncyCheckbox 
+                            key={item.key}
+                            size={20} 
+                            text={item.text}
+                            style={styles.checkbox}
+                            iconStyle={{ borderColor: "green" }}
+                            textStyle={{
+                                textDecorationLine: "none"
+                           }}
+                        />
+                        );
                     })
                 }
             </View>
@@ -135,24 +159,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         margin: 3
     },
-    circle: {
-        height: 20,
-        width: 20,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#ACACAC',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    checkedCircle: {
-        width: 14,
-        height: 14,
-        borderRadius: 7,
-        backgroundColor: '#794F9B',
-    },
-    options: {
-        fontSize: 17
+    checkbox: {
+        padding: 10
     }
 });
 
-export default Submit;
+export default SubmitRange;

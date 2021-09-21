@@ -2,9 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './screen/Home';
-import Submit from './screen/Submit';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import SubmitRange from './screen/SubmitRange';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -18,7 +18,7 @@ export default function App() {
         />
         <Stack.Screen
           name="Submit"
-          component={Submit}
+          component={SubmitRange}
         />
       </Stack.Navigator>
     </NavigationContainer>
